@@ -5,7 +5,6 @@ const config: Config = {
         './components/**/*.{js,vue,ts}',
         './layouts/**/*.vue',
         './pages/**/*.vue',
-        '/plugin/**/*.{js,ts}',
         './app.vue',
         './error.vue'
     ],

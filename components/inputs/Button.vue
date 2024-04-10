@@ -4,22 +4,24 @@
         :type="type"
         @click="clickTriggerEvent"
         :class="[
-            'relative z-10 inline-flex justify-center items-center w-auto min-w-16 align-middle leading-tight font-medium box-border no-underline',
+            'relative inline-flex justify-center items-center w-auto min-w-16 align-middle appearance-none leading-tight font-medium box-border no-underline select-none',
             variantClass,
         ]"
     >
-    <slot></slot>
-        <span class="absolute inset-0 rounded-[inherit] overflow-hidden">
+        <slot></slot>
+        <span class="absolute inset-0 z-0 rounded-[inherit] overflow-hidden pointer-events-none">
             <span
-                    
-                    class="absolute w-full aspect-square rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-button-ripple bg-red-600"
-                ></span>
+                v-for="(ripple, index) in rippleStack"
+                :key="index"
+                class="absolute w-full aspect-square rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 animate-button-ripple"
+                :style="{ top: ripple.y, left: ripple.x, backgroundColor: rippleColor }"
+            />
         </span>
     </button>
 </template>
 
 <script setup lang="ts">
-import { watchEffect, ref, onMounted, computed } from 'vue';
+import { watch, ref, onMounted, computed } from 'vue';
 
 interface RippleProps {
     x: string;
@@ -27,7 +29,7 @@ interface RippleProps {
 }
 
 interface ButtonProps {
-    type?: string;
+    type?: "button" | "submit" | "reset";
     variant?: 'text' | 'outlined' | 'contained';
     disabled?: boolean;
 }
@@ -39,9 +41,10 @@ const btnDom = ref<HTMLElement | null>(null);
 const rippleStack = ref<RippleProps[]>([]);
 const rippleColor = ref('#fff');
 
+let debounceTimer: null | NodeJS.Timeout = null; // 디바운스 타이머를 저장할 변수
+
 //button click hanlder
 const clickTriggerEvent = (e: MouseEvent) => {
-    console.log('check')
     if (!btnDom.value) return;
 
     const g = btnDom.value.getBoundingClientRect();
@@ -51,6 +54,15 @@ const clickTriggerEvent = (e: MouseEvent) => {
     rippleStack.value.push({ x: x + 'px', y: y + 'px' });
 
     emit('click');
+
+    if (debounceTimer) {
+        clearTimeout(debounceTimer);
+    }
+
+    // 0.7초 동안 추가 클릭이 없으면 rippleStack 초기화
+    debounceTimer = setTimeout(() => {
+        rippleStack.value = [];
+    }, 700);
 };
 
 onMounted(() => {
@@ -62,18 +74,6 @@ onMounted(() => {
     if (rgb) {
         const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
         rippleColor.value = brightness > 128 ? '#535353' : '#fff';
-    }
-});
-
-watchEffect(() => {
-    if (rippleStack.value.length > 0) {
-        // const timer = setTimeout(() => {
-        // rippleStack.value = [];
-        // }, 700);
-
-        // return () => {
-        // clearTimeout(timer);
-        // };
     }
 });
 

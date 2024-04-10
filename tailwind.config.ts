@@ -13,10 +13,13 @@ const config: Config = {
             fontFamily: {
                 sans: ['Pretendard', 'ui-sans-serif', 'system-ui'],
             },
+            backgroundImage: {
+                'auth-bg': "url('/public/images/bg/login_bg.png')"
+            },
             keyframes: {
                 'button-ripple': {
                     '0%': { filter:'blur(0px)', width: '0px', opacity: '0.15' },
-                    '100%': { filter:'blur(30px)', width: '300%', opacity: '0' },
+                    '100%': { filter:'blur(3px)', width: '300%', opacity: '0' },
                 },
             },
             animation: {

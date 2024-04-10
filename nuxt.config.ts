@@ -1,8 +1,11 @@
 import { defineNuxtConfig } from "nuxt/config"
-// https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
     devtools: { enabled: true },
-    css: ['~/public/css/main.css'],
+    modules: [
+        '@nuxtjs/tailwindcss'
+    ],
+    css: ['~/public/css/global.css'],
     postcss: {
         plugins: {
             tailwindcss: {},

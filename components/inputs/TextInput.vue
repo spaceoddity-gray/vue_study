@@ -1,17 +1,26 @@
 <template>
-    <div class="relative inline-flex flex-col my-2">
+    <div
+        :class="[
+            'relative inline-flex flex-col',
+            margin === 'normal' ? 'mt-4 mb-2' : margin === 'dense' && 'mt-2 mb-1'
+        ]"
+    >
         <label
             :class="[
                 'absolute z-[1] inset-0 h-fit overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none select-none scale-100 transition-text-input-label origin-top-left translate-x-[13px]',
                 isFocus ? 'text-blue-500' : 'text-slate-500',
-                isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : 'max-w-[calc(100%-24px)] translate-y-[16px] scale-100'
+                isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : `max-w-[calc(100%-24px)] ${size === 'small' ? 'translate-y-2' : size === 'medium' ? 'translate-y-3' : 'translate-y-2'} scale-100`
             ]"
         >
             {{ label }}
         </label>
         <div class="relative inline-flex items-center rounded box-border">
             <input
-                class="block w-full py-4 px-3 bg-transparent focus:outline-0"
+                :class="[
+                    'block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
+                    isUsed ? 'opacity-1' : 'opacity-0',
+                    size === 'small' ? 'py-2' : size === 'medium' ? 'py-3' : 'py-4'
+                ]"
                 :type="type"
                 :placeholder="placeholder"
                 @focus="isFocus = true"
@@ -45,7 +54,7 @@ interface TextInputProps {
     label: string;
     type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
     placeholder?: string;
-    size?: 'small' | 'medium';
+    size?: 'small' | 'medium' | 'large';
     margin?: 'none' | 'dense' | 'normal';
 }
 // props
@@ -53,6 +62,7 @@ withDefaults(defineProps<TextInputProps>(), {
     type: 'text',
     placeholder: '',
     size: 'medium',
+    margin: 'dense',
 });
 //state
 const isFocus = ref(false);

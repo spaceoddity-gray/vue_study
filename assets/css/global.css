@@ -5,7 +5,11 @@
 @tailwind utilities;
 
 :root {
+    --basicQuart: cubic-bezier(0, 0, 0.2, 1);
     --easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
+    --primary: #ff324b;
+    --hotpink: #ff329b;
+    --primary-gradient: linear-gradient(276deg,var(--hotpink) 5%,var(--primary) 95%);
 }
 
 /* 다크모드 */
@@ -61,7 +65,25 @@
 }
 
 @layer utilities {
+    .bg-primary {
+        background-color: var(--primary);
+    }
+    .border-primary {
+        border-color: var(--primary);
+    }
+    .text-primary {
+        color: var(--primary);
+    }
+    .bg-primary-gradient {
+        background-image: var(--primary-gradient);
+    }
     .bg-full {
         @apply bg-cover bg-no-repeat bg-center
+    }
+    .transition-text-input-label {
+        transition: color 200ms var(--basicQuart) 0ms, transform 200ms var(--basicQuart) 0ms, max-width 200ms var(--basicQuart) 0ms
+    }
+    .transition-text-input-legend {
+        transition: max-width 50ms var(--basicQuart) 0ms;
     }
 }

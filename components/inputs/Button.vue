@@ -4,7 +4,7 @@
         :type="type"
         @click="clickTriggerEvent"
         :class="[
-            'relative inline-flex justify-center items-center w-auto min-w-16 align-middle appearance-none leading-tight font-medium box-border no-underline select-none',
+            'relative inline-flex justify-center items-center w-auto min-w-16 align-middle appearance-none leading-tight box-border no-underline select-none',
             variantClass,
         ]"
     >
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 interface RippleProps {
     x: string;

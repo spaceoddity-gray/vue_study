@@ -18,12 +18,12 @@ const config: Config = {
             },
             keyframes: {
                 'button-ripple': {
-                    '0%': { filter:'blur(0px)', width: '0px', opacity: '0.15' },
+                    '0%': { filter:'blur(0px)', width: '0px', opacity: '0.25' },
                     '100%': { filter:'blur(3px)', width: '300%', opacity: '0' },
                 },
             },
             animation: {
-                'button-ripple': 'button-ripple 0.4s linear forwards',
+                'button-ripple': 'button-ripple 0.5s linear forwards',
             }
         },
     },

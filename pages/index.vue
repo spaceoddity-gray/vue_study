@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-    import Contents from '@/components/layout/Contents';
+    import Contents from '@/components/layout/Contents.vue';
 </script>

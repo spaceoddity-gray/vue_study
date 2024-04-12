@@ -37,8 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import Button from '@/components/inputs/Button';
-import TextInput from '@/components/inputs/TextInput';
+import Button from '@/components/inputs/Button.vue';
+import TextInput from '@/components/inputs/TextInput.vue';
 
 definePageMeta({
     layout: 'auth'
@@ -63,7 +63,6 @@ const submitForm = async (e: Event) => {
         const token = useCookie('login');
         token.value = res.sessionId
         router.push('/');
-        console.log(formDataObject); // 객체를 콘솔에 출력
     } catch (error) {
         console.error(error)
     }

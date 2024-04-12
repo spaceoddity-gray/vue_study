@@ -37,8 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import Button from '../components/inputs/Button.vue';
-import TextInput from '../components/inputs/TextInput.vue';
+import Button from '@/components/inputs/Button';
+import TextInput from '@/components/inputs/TextInput';
 
 definePageMeta({
     layout: 'auth'

@@ -16,13 +16,13 @@
         </label>
         <div class="relative inline-flex items-center rounded box-border">
             <input
+                v-bind="$attrs"
+                :type="type"
                 :class="[
                     'block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
                     isUsed ? 'opacity-1' : 'opacity-0',
                     size === 'small' ? 'py-2' : size === 'medium' ? 'py-3' : 'py-4'
                 ]"
-                :type="type"
-                :placeholder="placeholder"
                 @focus="isFocus = true"
                 @blur="isFocus = false"
                 v-model="value"
@@ -53,9 +53,9 @@ import { ref, watch, withDefaults, defineProps } from 'vue';
 interface TextInputProps {
     label: string;
     type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
-    placeholder?: string;
     size?: 'small' | 'medium' | 'large';
     margin?: 'none' | 'dense' | 'normal';
+    //name, input attr 등등..
 }
 // props
 withDefaults(defineProps<TextInputProps>(), {

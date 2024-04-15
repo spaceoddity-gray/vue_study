@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, withDefaults, defineProps } from 'vue';
+import { ref, watch, withDefaults } from 'vue';
 
 interface TextInputProps {
     label: string;

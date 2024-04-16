@@ -9,9 +9,15 @@ export default defineNuxtConfig({
     nitro: {
         devProxy: {
             "/api": {
-                    target: "https://manager-api-dev.kpop-radar.com/api",
-                    changeOrigin: true,
-                }
+                target: "https://manager-api-dev.kpop-radar.com/api",
+                changeOrigin: true,
+            }
+        },
+        routeRules: {
+            '/api': {
+                proxy: 'https://manager-api-dev.kpop-radar.com/api',
+                cors: true,
+            }
         }
     },
     postcss: {

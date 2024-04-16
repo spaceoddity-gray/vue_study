@@ -2,11 +2,12 @@
     <button
         ref="btnDom"
         :type="type"
-        @click="clickTriggerEvent"
         :class="[
-            'relative inline-flex justify-center items-center w-auto min-w-16 align-middle appearance-none leading-tight box-border no-underline select-none',
-            variantClass,
+            'relative select-none default-button',
+            variant === 'contained' ? 'default-button-contained' : variant === 'outlined' && 'default-button-outlined' 
+
         ]"
+        @click="clickTriggerEvent"
     >
         <slot></slot>
         <span class="absolute inset-0 z-0 rounded-[inherit] overflow-hidden pointer-events-none">
@@ -15,13 +16,13 @@
                 :key="index"
                 class="absolute w-full aspect-square rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 animate-button-ripple"
                 :style="{ top: ripple.y, left: ripple.x, backgroundColor: rippleColor }"
-            />
+            ></span>
         </span>
     </button>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 
 interface RippleProps {
     x: string;
@@ -34,7 +35,11 @@ interface ButtonProps {
     disabled?: boolean;
 }
 //props
-const props = defineProps<ButtonProps>();
+const {
+    type,
+    variant,
+    disabled,
+} = defineProps<ButtonProps>();
 const emit = defineEmits(['click']);
 //state
 const btnDom = ref<HTMLElement | null>(null);
@@ -76,11 +81,5 @@ onMounted(() => {
         rippleColor.value = brightness > 128 ? '#535353' : '#fff';
     }
 });
-
-const variantClass = computed(() => ({
-    'bg-slate-500': props.variant === 'contained',
-    'bg-transparent': props.variant !== 'contained',
-    'border border-slate-500': props.variant === 'outlined',
-}));
 
 </script>

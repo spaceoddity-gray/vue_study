@@ -31,8 +31,20 @@
 
 /* 폰트 관련 커스텀 스타일 */
 @layer base {
+    .bg-primary {
+        background-color: var(--primary);
+    }
+    .border-primary {
+        border-color: var(--primary);
+    }
+    .text-primary {
+        color: var(--primary);
+    }
     body {
         @apply text-slate-800;
+    }
+    hr {
+        @apply border-slate-200;
     }
     h1 {
         @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl;
@@ -62,18 +74,18 @@
         @apply text-xs md:text-sm xl:text-base;
         @apply leading-tight;
     }
+    .default-button {
+        @apply inline-flex justify-center items-center w-auto min-w-16 px-6 py-2.5 rounded-lg align-middle appearance-none leading-tight box-border no-underline font-bold text-sm leading-[1.2];
+    }
+    .default-button-contained {
+        @apply text-white bg-primary;
+    }
+    .default-button-outlined {
+        @apply text-primary border border-primary;
+    }
 }
 
 @layer utilities {
-    .bg-primary {
-        background-color: var(--primary);
-    }
-    .border-primary {
-        border-color: var(--primary);
-    }
-    .text-primary {
-        color: var(--primary);
-    }
     .bg-primary-gradient {
         background-image: var(--primary-gradient);
     }

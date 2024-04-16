@@ -9,11 +9,11 @@
                         v-if="index + 1 < routes.length"
                         :to="asPath"
                     >
-                        <span class="text-slate-400">
+                        <span class="text-slate-400 hover:underline">
                             {{ pathName }}
                         </span>
                     </NuxtLink>
-                    <span v-else>
+                    <span v-else class="text-slate-700">
                         {{ pathName }}
                     </span>
                 </li>
@@ -30,11 +30,11 @@
 
 <script setup lang="ts">
 
-interface BreadcrumbsRouteObject {
+export interface BreadcrumbsRouteObject {
     pathName: string;
-    asPath: string;
+    asPath?: string;
 }
-interface BreadcrumbsProps {
+export interface BreadcrumbsProps {
     routes: BreadcrumbsRouteObject[];
 }
 //props

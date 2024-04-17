@@ -8,7 +8,7 @@
             v-if="typeof path === 'string'"
             :to="path"
         >
-            <div :class="[`flex items-center py-[5px] pr-6`]" :style="`padding-left: ${((depsIndex - 1)/2) + 1.5}rem`">
+            <div :class="[`flex items-center py-[6px] pr-6`]" :style="`padding-left: ${((depsIndex - 1)/2) + 1.5}rem`">
                 <div class="flex-1">
                     <span class="text-sm">
                         {{ label }}

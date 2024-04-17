@@ -3,9 +3,16 @@
         <AppBar class="fixed ml-[240px]">
         </AppBar>
         <Drawer class="w-[240px]">
-            <div class="h-16 py-2 px-4">
+            <div class="h-16 py-3 px-4">
                 <NuxtLink to="/">
-                    <div class="bg-slate-500 h-full"></div>
+                    <div class="h-full flex justify-center items-center">
+                        <NuxtImg
+                            src="/images/logo_blip.svg"
+                            alt="blip-logo"
+                            class="h-full w-full object-contain"
+                            sizes="200px"
+                        />
+                    </div>
                 </NuxtLink>
             </div>
             <div class="flex-1 overflow-auto border-r border-slate-200">
@@ -16,7 +23,7 @@
                     >
                         <h4
                             v-if="label && label !== ''"
-                            class="px-4 py-1 text-xs text-slate-400"
+                            class="px-4 py-1 text-[10px] text-slate-400"
                         >
                             {{label}}
                         </h4>
@@ -38,7 +45,7 @@
                 </Menu>
             </div>
         </Drawer>
-        <div class="relative flex-1 mt-16 pt-9 pb-12 bg-slate-50/[0.4]">
+        <div class="relative flex-1 mt-16 pt-9 pb-12 bg-slate-50/[0.4] overflow-hidden">
             <Container>
                 <slot></slot>
             </Container>
@@ -66,19 +73,19 @@ interface AsideData {
 
 const asideJson: AsideData[]  = [
     {
-        label: '아티스트',
+        label: 'TEST',
         group: [
             {
-                label: '아티스트 1댑스',
+                label: 'DEPS 1',
                 deps: [
                     {
-                        label: '아티스트 2댑스',
+                        label: 'DEPS 2',
                         deps: [
                             {
-                                label: '아티스트 3댑스',
+                                label: 'DEPS 3',
                                 deps: [
                                     {
-                                        label: '아티스트 4댑스',
+                                        label: 'DEPS 4',
                                         path: '/',
                                     },
                                 ]
@@ -90,11 +97,15 @@ const asideJson: AsideData[]  = [
         ],
     },
     {
-        label: '회원',
+        label: 'PERSON',
         group: [
             {
-                label: '아티스트',
-                path: '/',
+                label: '인물 관리',
+                path: '/person',
+            },
+            {
+                label: '아티스트 관리',
+                path: '/artist',
             },
         ],
     },

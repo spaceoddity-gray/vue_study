@@ -2,20 +2,29 @@
     <div class="flex justify-between items-center">
         <div>
             <h6 class="font-semibold">
-                타이틀 입니다
-                <p class="text-sm font-normal text-slate-500">서브타이틀 입니다</p>
+                {{ title || '타이틀' }}
+                <p
+                    v-if="subTitle"
+                    class="mt-0.5 text-sm font-light text-slate-400">
+                    {{ subTitle }}
+                </p>
             </h6>
             <Breadcrumbs
                 class="mt-4"
                 :routes="routes"
             />
         </div>
-        <div class="flex gap-2">
-            <Button
-                variant="contained"
-            >
-                생성
-            </Button>
+        <div v-if="buttons && buttons.length > 0" class="flex gap-2">
+            <template v-for="(btn) in buttons">
+                <Button
+                    :type="btn.type"
+                    :variant="btn.variant"
+                    :disabled="btn.disabled"
+                    @click="clickEvent"
+                >
+                    {{ btn.label }}
+                </Button>
+            </template>
         </div>
     </div>
     <div class="relative w-full mt-10 px-4 py-6 box-border shadow-md bg-white">
@@ -26,13 +35,29 @@
 <script setup lang="ts">
 import Breadcrumbs, { type BreadcrumbsProps } from '../navigation/Breadcrumbs.vue';
 import Button from '../inputs/Button.vue';
+//type
+import type { ButtonProps } from '../inputs/Button.vue';
+
+interface ContentsButtonsObject extends ButtonProps {
+    label?: string;
+}
 
 interface ContentsProps extends BreadcrumbsProps {
-
+    title?: string;
+    subTitle?: string;
+    buttons?: ContentsButtonsObject[];
 }
 
 const {
-    routes
+    routes,
+    title,
+    buttons,
 } = defineProps<ContentsProps>();
+
+const emit = defineEmits(['click']);
+
+const clickEvent = () => {
+    emit('click');
+}
 
 </script>

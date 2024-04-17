@@ -29,7 +29,7 @@ interface RippleProps {
     y: string;
 }
 
-interface ButtonProps {
+export interface ButtonProps {
     type?: "button" | "submit" | "reset";
     variant?: 'text' | 'outlined' | 'contained';
     disabled?: boolean;

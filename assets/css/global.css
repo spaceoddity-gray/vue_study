@@ -83,6 +83,9 @@
     .default-button-outlined {
         @apply text-primary border border-primary;
     }
+    .default-table-tr {
+        @apply table-row text-inherit border-b border-slate-100 align-middle outline-0 text-sm;
+    }
 }
 
 @layer utilities {

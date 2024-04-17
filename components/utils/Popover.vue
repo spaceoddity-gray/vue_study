@@ -13,10 +13,11 @@
                     >
                     </div>
                     <div
-                        class="absolute overflow-x-hidden overflow-y-auto max-w-[calc(100%-32px)] max-h-[calc(100%-32px)] outline-0 min-w-4 min-h-4 rounded-md bg-white shadow-lg"
+                        class="absolute z-[1] overflow-x-hidden overflow-y-auto max-w-[calc(100%-32px)] max-h-[calc(100%-32px)] outline-0 min-w-4 min-h-4 rounded-md bg-white shadow-lg"
                         :style="[
                             {left: anchorPos.horizontal + 'px'},
                             {top: anchorPos.vertical + 'px'},
+                            {minWidth: anchorWidth + 'px'}
                         ]"
                     >
                         <slot></slot>
@@ -61,7 +62,9 @@ const props = withDefaults(defineProps<PopoverProps>(), {
 //emit
 const emit = defineEmits<PopoverEmits>()
 //state
+const contentEl = ref(null);
 const isVisible = ref(Boolean(props.open)); //popover 활성화 여부
+const anchorWidth = ref(0);
 const anchorPos = ref({ vertical: 0, horizontal: 0 });
 const transformPos = ref({ vertical: 0, horizontal: 0 });
 
@@ -108,6 +111,7 @@ const updatePosition = () => {
                 break;
         }
 
+        anchorWidth.value = ael.width;
         anchorPos.value = {
             vertical,
             horizontal,

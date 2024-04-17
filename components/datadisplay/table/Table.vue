@@ -29,7 +29,7 @@
                     >
                         <td
                             class="table-cell align-[inherit] p-4 text-sm border-b border-b-slate-100"
-                            
+
                         >
                             {{ part[1] }}
                         </td>
@@ -38,9 +38,11 @@
             </template>
         </tbody>
     </table>
+    <TableFooter/>
 </template>
 
 <script setup lang="ts">
+import TableFooter from './TableFooter.vue';
 
 //데이터 테이블 헤더 타입
 export interface ColsData {

@@ -1,16 +1,17 @@
 <template>
     <div
         :class="[
-            'relative inline-flex flex-col min-w-[120px]',
-            margin === 'normal' ? 'mt-4 mb-2' : margin === 'dense' && 'mt-2 mb-1'
+            'default-select',
+            margin === 'normal' ? 'mt-4 mb-2' : margin === 'dense' && 'mt-2 mb-1',
+            $attrs.class
         ]"
         ref="selectEl"
     >
         <label
             :class="[
-                'absolute z-[1] inset-0 h-fit overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none select-none scale-100 transition-text-input-label origin-top-left translate-x-[13px]',
+                'absolute z-[1] inset-0 h-fit overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none select-none scale-100 transition-text-input-label origin-top-left translate-x-[16px] pr-8',
                 isFocus ? 'text-blue-500' : 'text-slate-500',
-                isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : `max-w-[calc(100%-24px)] ${size === 'small' ? 'translate-y-2' : size === 'medium' ? 'translate-y-3' : 'translate-y-2'} scale-100`
+                isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : `max-w-[calc(100%-24px)] ${size === 'small' ? 'translate-y-2.5' : size === 'medium' ? 'translate-y-3' : 'translate-y-2.5'} scale-100`
             ]"
         >
             {{ label }}
@@ -18,7 +19,7 @@
         <div class="relative inline-flex items-center rounded box-border">
             <div
                 :class="[
-                    'min-h-6 w-full pl-4 pr-8 box-content',
+                    'min-h-6 w-full pl-4 pr-8 box-content truncate',
                     size === 'small' ? 'py-2' : size === 'medium' ? 'py-3' : 'py-4'
                 ]"
                 @click="focusEvent"
@@ -72,7 +73,10 @@
                 :key="opIndex"
             >
                 <div
-                    class="flex items-center justify-center py-2 px-4 cursor-pointer hover:bg-slate-200/[0.4]"
+                    :class="[
+                    'flex items-center justify-center px-4 cursor-pointer text-sm hover:bg-slate-200/[0.4]',
+                    size === 'small' ? 'py-0.5' : size === 'medium' ? 'py-1.5' : 'py-2.5'
+                ]"
                     @click="() => selectedEvent(option.value, option)"
                 >
                     {{ option.label }}

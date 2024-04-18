@@ -1,4 +1,5 @@
 <template>
+    <TableSearch/>
     <table class="table w-full border-collapse border-spacing-0 min-w-[600px]">
         <thead class="table-header-group box-border">
             <tr class="efault-table-tr">
@@ -42,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import TableSearch from './TableSearch.vue';
 import TableFooter from './TableFooter.vue';
 
 //데이터 테이블 헤더 타입

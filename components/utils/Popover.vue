@@ -122,9 +122,9 @@ const updatePosition = () => {
 
 watch(() => props.open, (newPrev) => {
     if(newPrev) {
-        updatePosition();
         isVisible.value = true;
         document.body.style.overflow ='hidden';
+        updatePosition();
     }
     else
     {
@@ -132,14 +132,16 @@ watch(() => props.open, (newPrev) => {
     }
 });
 
-onMounted(() => {
-    updatePosition();
-    window.addEventListener('resize', updatePosition);
-})
-
 onUnmounted(() => {
     document.body.style.removeProperty('overflow');
     window.removeEventListener('resize', updatePosition);
+})
+
+watch(() => props.anchorEl, () => {
+    if(props.anchorEl) {
+        updatePosition();
+        window.addEventListener('resize', updatePosition);
+    }
 })
 
 </script>

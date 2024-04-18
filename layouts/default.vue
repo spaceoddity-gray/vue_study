@@ -1,6 +1,15 @@
 <template>
     <div class="flex min-h-dvh">
-        <AppBar class="fixed ml-[240px]">
+        <AppBar class="fixed ml-[240px] w-[calc(100%-240px)]">
+            <div class="relative w-full h-full flex items-center justify-end">
+                <Button
+                    type="button"
+                    class="py-4 px-0"
+                    @click="logout"
+                >
+                    로그아웃
+                </Button>
+            </div>
         </AppBar>
         <Drawer class="w-[240px]">
             <div class="h-16 py-3 px-4">
@@ -59,6 +68,7 @@ import Drawer from '../components/navigation/Drawer.vue';
 import Container from '../components/layout/Container.vue';
 import Menu from '../components/navigation/Menu/Menu.vue';
 import MenuItem from '../components/navigation/Menu/MenuItem.vue';
+import Button from '@/components/inputs/Button.vue';
 //type
 import type { MenuItemObject } from '../components/navigation/Menu/MenuItem.vue';
 
@@ -69,6 +79,15 @@ defineNuxtComponent({
 interface AsideData {
     label: string;
     group: MenuItemObject[];
+}
+//router
+const router = useRouter();
+
+//로그아웃
+const logout = () => {
+    const token = useCookie('login');
+    token.value = null;
+    router.push('/login');
 }
 
 const asideJson: AsideData[]  = [

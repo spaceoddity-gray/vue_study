@@ -74,6 +74,9 @@
         @apply text-xs md:text-sm xl:text-base;
         @apply leading-tight;
     }
+    .default-app-bar {
+        @apply flex flex-col w-full box-border z-50 bg-white/[.8] backdrop-blur shadow;
+    }
     .default-button {
         @apply inline-flex justify-center items-center w-auto min-w-16 px-6 py-2.5 rounded-lg align-middle appearance-none leading-tight box-border no-underline font-bold text-sm leading-[1.2];
     }

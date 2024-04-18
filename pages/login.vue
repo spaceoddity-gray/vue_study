@@ -64,6 +64,7 @@ const submitForm = async (e: Event) => {
         token.value = res.sessionId
         router.push('/');
     } catch (error) {
+        alert('로그인에 실패하였습니다.')
         console.error(error)
     }
 }

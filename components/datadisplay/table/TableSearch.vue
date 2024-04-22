@@ -7,6 +7,7 @@
         />
         <TextInput
             label="검색"
+            name="search"
             margin="none"
             class="w-full"
         />

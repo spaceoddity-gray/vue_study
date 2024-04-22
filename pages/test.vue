@@ -1,12 +1,10 @@
 <template>
-    <Select
-        label="테스트"
-        :options="selectOptions"
-    />
+    <Switch name="testSwitch" label="사용 여부"/>
 </template>
 
 <script setup lang="ts">
 import Select from '@/components/inputs/Select.vue';
+import Switch from '@/components/inputs/Switch.vue';
 
 const selectOptions = [
     {

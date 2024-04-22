@@ -2,10 +2,7 @@ import { defineNuxtConfig } from "nuxt/config"
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
-    modules: [
-        '@nuxt/image',
-        '@nuxtjs/tailwindcss'
-    ],
+    modules: ['@nuxt/image', '@nuxtjs/tailwindcss', "@samk-dev/nuxt-vcalendar", "dayjs-nuxt"],
     css: ['~/assets/css/global.css'],
     nitro: {
         devProxy: {

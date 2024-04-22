@@ -11,18 +11,33 @@
             >
                 <div class="grid gap-1">
                     <TextInput
-                        label="userName"
+                        label="User Name"
                         name="username"
                         class="w-full"
                         placeholder="유저명을 입력해주세요."
                     />
                     <TextInput
-                        label="password"
+                        :type="isPasswordText ? 'text' : 'password'"
+                        label="Password"
                         name="password"
-                        type="password"
                         placeholder="비밀번호를 입력해주세요."
-                        class="w-full"
-                    />
+                        class="w-full" 
+                    >
+                        <template #endAdornment>
+                            <Button
+                                type="button"
+                                class="p-0 min-w-0 w-6"
+                                @click="updatePasswordEvent"
+                            >
+                                    <template v-if="isPasswordText">
+                                        <EyeBlind/>
+                                    </template>
+                                    <template v-else>
+                                        <EyeVisible/>
+                                    </template>
+                            </Button>
+                        </template>
+                    </TextInput>
                 </div>
                 <Button
                     type="submit"
@@ -39,12 +54,21 @@
 <script setup lang="ts">
 import Button from '@/components/inputs/Button.vue';
 import TextInput from '@/components/inputs/TextInput.vue';
+import EyeVisible from '@/components/icons/EyeVisible.vue';
+import EyeBlind from '@/components/icons/EyeBlind.vue';
 
 definePageMeta({
     layout: 'auth'
 });
-
+//route
 const router = useRouter();
+//state
+const isPasswordText = ref(false); //비밀번호 표시
+
+//비멀번호 표시 업데이트
+const updatePasswordEvent = () => {
+    isPasswordText.value = !isPasswordText.value
+}
 
 const submitForm = async (e: Event) => {
     try {

@@ -119,7 +119,6 @@ const updatePosition = () => {
     }
 }
 
-
 watch(() => props.open, (newPrev) => {
     if(newPrev) {
         isVisible.value = true;

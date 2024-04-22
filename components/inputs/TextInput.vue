@@ -14,19 +14,24 @@
         >
             {{ label }}
         </label>
-        <div class="relative inline-flex items-center rounded box-border">
+        <div class="relative inline-flex items-center rounded box-border overflow-hidden">
             <input
                 v-bind="$attrs"
-                :type="type"
+                :type="inputType"
                 :class="[
-                    'block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
+                    'flex-1 block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
                     isUsed ? 'opacity-1' : 'opacity-0',
                     size === 'small' ? 'py-2' : size === 'medium' ? 'py-3' : 'py-4'
                 ]"
                 @focus="isFocus = true"
                 @blur="isFocus = false"
-                v-model="value"
+                v-model="inputValue"
             />
+            <template v-if="$slots.endAdornment">
+                <div class="flex max-h-[48px] p-3 overflow-hidden items-center whitespace-nowrap ml-2 text-slate-400">
+                    <slot name="endAdornment"></slot>
+                </div>
+            </template>
             <fieldset
                 :class="[
                     'absolute inset-0 -top-[5px] px-2 border border-solid rounded-[inherit] pointer-events-none overflow-hidden',
@@ -48,29 +53,79 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, withDefaults } from 'vue';
+
+type BaseInputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+
+interface TextInputEmits {
+    (event: 'change', value: string): void;
+    (event: 'focus', isFocused: boolean): void;
+}
 
 interface TextInputProps {
     label: string;
-    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+    name: string;
+    type?: BaseInputType;
     size?: 'small' | 'medium' | 'large';
     margin?: 'none' | 'dense' | 'normal';
-    //name, input attr 등등..
+    defaultValue?: string;
+    value?: string;
 }
 // props
-withDefaults(defineProps<TextInputProps>(), {
+const props = withDefaults(defineProps<TextInputProps>(), {
     type: 'text',
     placeholder: '',
     size: 'medium',
     margin: 'dense',
+    defaultValue: '',
+    value: '',
 });
+//emit
+const emit = defineEmits<TextInputEmits>();
 //state
-const isFocus = ref(false);
-const isUsed = ref(false);
-const value = ref('');
+const isFocus = ref(false); // 포커스 여부
+const isUsed = ref(props.defaultValue || props.value ? true : false); //라벨 활성화 여부
+const inputType = ref<BaseInputType>(props.type); //input type state
+const inputValue = ref<string>(props.defaultValue); //해당 컴포넌트에서 저장하는 input value
 
-watch([value, isFocus], (prev) => {
-    isUsed.value = Boolean(prev[1] || prev[0].length > 0);
+onMounted(() => {
+    if (props.defaultValue || props.value) {
+        inputValue.value = props.value || props.defaultValue;
+        isUsed.value = true;
+    }
+});
+
+watch(() => props.value, (newValue) => {
+    inputValue.value = newValue;
+});
+
+watch(() => props.type, (newType) => {
+    console.log(newType);
+    inputType.value = newType;
+});
+
+watch(inputValue, (newValue, oldValue) => {
+    isUsed.value = Boolean(newValue.length > 0);
+    if (newValue !== oldValue) {
+        emit('change', newValue);
+    }
+});
+
+watch(isFocus, (newFocus, oldFocus) => {
+    if(newFocus !== oldFocus) {
+        emit('focus', newFocus);
+    }
+})
+
+//isUsed control
+watch([inputValue, isFocus], ([newValue, newFocus]) => {
+    if(newFocus || (!newFocus && newValue.length > 0)) // 포커스 했을 경우 무조건 isUsed 활성화
+    {
+        isUsed.value = true;
+    }
+    else
+    {
+        isUsed.value = false;
+    }
 });
 
 </script>

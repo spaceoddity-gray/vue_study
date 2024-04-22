@@ -2,12 +2,13 @@
     <Contents
         :routes="indexRoute"
         title="인물 관리"
-        sub-title="인물을 생성/수정하는 페이지입니다."
+        sub-title="인물을 등록/수정하는 페이지입니다."
         :buttons="[
             {
                 type: 'button',
                 variant: 'contained',
-                label: '생성'
+                label: '등록',
+                click: () => {$router.push('/person/form')}
             }
         ]"
     >

@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>어드민</Title>
+    </Head>
     <div class="flex min-h-dvh">
         <AppBar class="fixed ml-[240px] w-[calc(100%-240px)]">
             <div class="relative w-full h-full flex items-center justify-end">

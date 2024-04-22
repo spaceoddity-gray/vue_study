@@ -20,7 +20,7 @@
                     :type="btn.type"
                     :variant="btn.variant"
                     :disabled="btn.disabled"
-                    @click="clickEvent"
+                    @click="(e) => clickEvent(e, btn.click)"
                 >
                     {{ btn.label }}
                 </Button>
@@ -40,6 +40,7 @@ import type { ButtonProps } from '../inputs/Button.vue';
 
 interface ContentsButtonsObject extends ButtonProps {
     label?: string;
+    click?: () => void;
 }
 
 interface ContentsProps extends BreadcrumbsProps {
@@ -54,10 +55,10 @@ const {
     buttons,
 } = defineProps<ContentsProps>();
 
-const emit = defineEmits(['click']);
-
-const clickEvent = () => {
-    emit('click');
+const clickEvent = (e: any, callbackEvent?: (e: any) => void) => {
+    if(typeof callbackEvent === 'function') {
+        callbackEvent(e)
+    }
 }
 
 </script>

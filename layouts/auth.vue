@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Auth page</title>
+    </Head>
     <section class="relative grid grid-rows-[1fr_auto] min-h-dvh bg-slate-100 bg-auth-bg bg-full bg-opacity-5">
         <div class="container h-full m-auto px-4">
             <slot />

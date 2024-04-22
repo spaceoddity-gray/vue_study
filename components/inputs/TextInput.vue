@@ -18,6 +18,7 @@
             <input
                 v-bind="$attrs"
                 :type="inputType"
+                :name="name"
                 :class="[
                     'flex-1 block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
                     isUsed ? 'opacity-1' : 'opacity-0',

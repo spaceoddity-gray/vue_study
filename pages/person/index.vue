@@ -1,6 +1,14 @@
 <template>
     <Contents
-        :routes="indexRoute"
+        :routes="[
+            {
+                pathName: '메인',
+                asPath: '/'
+            },
+            {
+                pathName: '인물 검색 및 등록'
+            }
+        ]"
         title="인물 검색 및 등록"
         sub-title="인물을 검색 및 등록하는 페이지입니다."
         :buttons="[
@@ -24,17 +32,6 @@
 <script setup lang="ts">
 import Contents from '@/components/layout/Contents.vue';
 import Table from '@/components/datadisplay/table/Table.vue';
-
-//컨텐츠 라우트 정보
-const indexRoute = [
-    {
-        pathName: '메인',
-        asPath: '/'
-    },
-    {
-        pathName: '인물 검색 및 등록'
-    }
-]
 
 const tableCols = [
     {

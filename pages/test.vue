@@ -1,10 +1,11 @@
 <template>
-    <Switch name="testSwitch" label="사용 여부"/>
+    <Progress class="text-red-400"/>
 </template>
 
 <script setup lang="ts">
 import Select from '@/components/inputs/Select.vue';
 import Switch from '@/components/inputs/Switch.vue';
+import Progress from '@/components/feedback/Progress.vue';
 
 const selectOptions = [
     {

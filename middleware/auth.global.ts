@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    const token = useCookie('login'); //login token
+    const { value: token } = useCookie('blip_admin_test_session'); //login token
 
-    if(!token.value) {
+    if(!token) {
         if(to.path !== '/login') {
             return navigateTo('/login')
         }

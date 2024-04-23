@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <Title>어드민</Title>
+        <Title>Blip 어드민</Title>
     </Head>
     <div class="flex min-h-dvh">
         <AppBar class="fixed ml-[240px] w-[calc(100%-240px)]">
@@ -88,46 +88,31 @@ const router = useRouter();
 
 //로그아웃
 const logout = () => {
-    const token = useCookie('login');
+    const token = useCookie('blip_admin_test_session');
     token.value = null;
     router.push('/login');
 }
 
 const asideJson: AsideData[]  = [
     {
-        label: 'TEST',
-        group: [
-            {
-                label: 'DEPS 1',
-                deps: [
-                    {
-                        label: 'DEPS 2',
-                        deps: [
-                            {
-                                label: 'DEPS 3',
-                                deps: [
-                                    {
-                                        label: 'DEPS 4',
-                                        path: '/',
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                ]
-            }
-        ],
-    },
-    {
-        label: 'PERSON',
+        label: 'QC',
         group: [
             {
                 label: '인물 관리',
-                path: '/person',
+                deps: [
+                    {
+                        label: '인물 검색 및 등록',
+                        path: '/person'
+                    },
+                    {
+                        label: '아티스트 관리',
+                        path: '/artist'
+                    }
+                ]
             },
             {
-                label: '아티스트 관리',
-                path: '/artist',
+                label: '소속사 관리',
+                path: '/agency',
             },
         ],
     },

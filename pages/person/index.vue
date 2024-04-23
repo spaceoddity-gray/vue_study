@@ -1,8 +1,8 @@
 <template>
     <Contents
         :routes="indexRoute"
-        title="인물 관리"
-        sub-title="인물을 등록/수정하는 페이지입니다."
+        title="인물 검색 및 등록"
+        sub-title="인물을 검색 및 등록하는 페이지입니다."
         :buttons="[
             {
                 type: 'button',
@@ -32,7 +32,7 @@ const indexRoute = [
         asPath: '/'
     },
     {
-        pathName: '인물 관리'
+        pathName: '인물 검색 및 등록'
     }
 ]
 

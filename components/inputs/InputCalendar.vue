@@ -35,7 +35,7 @@ import TextInput from './TextInput.vue';
 import Popover from '../utils/Popover.vue';
 
 interface CalendarEmits {
-    (event: 'change', value: Date): void;
+    (event: 'change', valueObject: {date: Date, formatDate: string}): void;
 }
 
 interface CalendarProps {
@@ -72,11 +72,19 @@ const updateInputDate = (value: string) => {
     date.value = new Date(value)
 }
 
+const updateEmit = (dateValue: Date) => {
+    const json = {
+        date: dateValue,
+        formatDate: dayjs(dateValue).format(props.format)
+    };
+    emit('change', json);
+}
+
 onMounted(() => {
-    emit('change', date.value);
+    updateEmit(date.value);
 });
 
 watch(date, (newDate, oldDate) => {
-    
+    updateEmit(newDate);
 });
 </script>

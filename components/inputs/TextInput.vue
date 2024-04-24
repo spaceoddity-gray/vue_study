@@ -19,13 +19,16 @@
                 v-bind="$attrs"
                 :type="inputType"
                 :name="name"
+                :placeholder="placeholder"
                 :class="[
-                    'flex-1 block w-full px-3 bg-transparent focus:outline-0 transition-opacity',
+                    'flex-1 block w-full px-3 bg-transparent focus:outline-0 transition-opacity appearance-none',
                     isUsed ? 'opacity-1' : 'opacity-0',
                     size === 'small' ? 'py-2' : size === 'medium' ? 'py-3' : 'py-4'
                 ]"
                 @focus="isFocus = true"
                 @blur="isFocus = false"
+                @keyup="handleKeyup"
+                @keydown="handleKeydown"
                 v-model="inputValue"
             />
             <template v-if="$slots.endAdornment">
@@ -55,17 +58,20 @@
 
 <script setup lang="ts">
 
-type BaseInputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+type BaseInputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
 
 interface TextInputEmits {
     (event: 'change', value: string): void;
     (event: 'focus', isFocused: boolean): void;
+    (event: 'keydown', e: KeyboardEvent): void,
+    (event: 'keyup', e: KeyboardEvent): void
 }
 
 interface TextInputProps {
     label: string;
     name: string;
     type?: BaseInputType;
+    placeholder?: string;
     size?: 'small' | 'medium' | 'large';
     margin?: 'none' | 'dense' | 'normal';
     defaultValue?: string;
@@ -87,6 +93,14 @@ const isFocus = ref(false); // 포커스 여부
 const isUsed = ref(props.defaultValue || props.value ? true : false); //라벨 활성화 여부
 const inputType = ref<BaseInputType>(props.type); //input type state
 const inputValue = ref<string>(props.defaultValue); //해당 컴포넌트에서 저장하는 input value
+
+const handleKeyup = (e: KeyboardEvent) => {
+    emit('keyup', e);
+}
+
+const handleKeydown = (e: KeyboardEvent) => {
+    emit('keydown', e);
+}
 
 onMounted(() => {
     if (props.defaultValue || props.value) {

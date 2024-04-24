@@ -89,11 +89,11 @@
 <script setup lang="ts">
 import Popover from '../utils/Popover.vue';
 //type
-interface OtionsObject {
+export interface OtionsObject {
     label: string;
     value: string;
 }
-interface SelectProps {
+export interface SelectProps {
     label: string;
     defaultValue?: string;
     size?: 'small' | 'medium' | 'large';

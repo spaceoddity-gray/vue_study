@@ -45,7 +45,7 @@ const animationStyle = computed(() => `
     --offset: ${offset.value};
     --unoffset: ${offset.value * -1};
     stroke-dashoffset: ${offset.value};
-    animation: progress ${props.size * 0.035}s ease-in-out infinite;
+    animation: progress 1.4s ease-in-out infinite;
 `);
 
 </script>

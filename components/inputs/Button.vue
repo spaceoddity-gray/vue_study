@@ -2,6 +2,7 @@
     <button
         ref="btnDom"
         :type="type"
+        :disabled="disabled"
         :class="[
             'relative select-none default-button',
             variant === 'contained' ? 'default-button-contained' : variant === 'outlined' && 'default-button-outlined' 

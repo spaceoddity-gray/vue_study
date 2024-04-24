@@ -76,6 +76,7 @@ const onClose = () => {
     }, 170);
 }
 
+//화면 size 시 위치값 자동으로 업데이트
 const updatePosition = () => {
     if(props.anchorEl)
     {
@@ -119,28 +120,45 @@ const updatePosition = () => {
     }
 }
 
-watch(() => props.open, (newPrev) => {
-    if(newPrev) {
+//document scroll control
+const updateScrollStyle = (isOpen: boolean) => {
+    const el = document.body;
+
+    if(isOpen) {
         isVisible.value = true;
-        document.body.style.overflow ='hidden';
         updatePosition();
+
+        if(window.getComputedStyle(el).overflow !== 'hidden')
+        {
+            el.style.overflow ='hidden';
+        }
     }
     else
     {
-        document.body.style.removeProperty('overflow');
+        el.style.removeProperty('overflow');
     }
-});
+}
 
-onUnmounted(() => {
-    document.body.style.removeProperty('overflow');
-    window.removeEventListener('resize', updatePosition);
+//first mount
+onMounted(() => {
+    updateScrollStyle(props.open);
 })
+
+//use effect
+watch(() => props.open, (newOpen) => {
+    updateScrollStyle(newOpen);
+});
 
 watch(() => props.anchorEl, () => {
     if(props.anchorEl) {
         updatePosition();
         window.addEventListener('resize', updatePosition);
     }
-})
+});
+
+onUnmounted(() => {
+    document.body.style.removeProperty('overflow');
+    window.removeEventListener('resize', updatePosition);
+});
 
 </script>

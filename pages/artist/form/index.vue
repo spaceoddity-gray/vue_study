@@ -1,0 +1,154 @@
+<template>
+    <Contents
+        :routes="[{
+        pathName: '메인',
+        asPath: '/'
+        },
+        {
+            pathName: '아티스트 관리',
+            asPath: '/artist'
+        },
+        {
+            pathName: '아티스트 등록',
+        }
+    ]"
+        title="아티스트 등록"
+        sub-title="아티스트를 등록해주세요."
+    >
+        <div>
+            <div class="grid gap-3">
+                <Radio
+                    name="type"
+                    row
+                    label="아티스트 타입"
+                    default-value="solo"
+                    :options="[
+                        {
+                            label: '솔로',
+                            value: 'solo'
+                        },
+                        {
+                            label: '그룹',
+                            value: 'group'
+                        },
+                    ]"
+                />
+                <TextInput
+                    label="활동명"
+                    name="name"
+                />
+                <InputCalendar
+                    label="데뷔일"
+                    name=""
+                    format="YYYY.MM.DD"
+                />
+                <Switch
+                    label="노출 여부"
+                    name=""
+                />
+                <Switch
+                    label="KPOP Artist"
+                    name=""
+                />
+                <Switch
+                    label="뮤직 차트 크롤링"
+                    name=""
+                />
+            </div>
+        </div>
+    </Contents>
+    <div class="flex justify-end gap-2 mt-4">
+        <Button
+            type="button"
+            variant="contained"
+            class="bg-slate-300"
+            @click="$router.back()"
+        >
+            취소
+        </Button>
+        <Button
+            type="button"
+            variant="contained"
+            @click="postPersonEvent"
+        >
+            등록
+        </Button>
+    </div>
+</template>
+
+<script setup lang="ts">
+import Contents from '@/components/layout/Contents.vue';
+import TextInput from '@/components/inputs/TextInput.vue';
+import Radio from '@/components/inputs/Radio.vue';
+import InputCalendar from '@/components/inputs/InputCalendar.vue';
+import Button from '@/components/inputs/Button.vue';
+import Switch from '@/components/inputs/Switch.vue';
+
+interface PersonObject {
+    type: string,
+    name: string,
+    gender: string,
+    personId: number,
+    debutDate: 0,
+    indexVisible: number,
+    isKpop: number,
+    isMusicChartCrawl: number,
+    path: string,
+    names: [
+        {
+        indexId: 0,
+        name: string
+        }
+    ],
+    agencies: [
+        {
+        agencyId: 0
+        }
+    ],
+    profileImages: [
+        {
+        name: string,
+        url: string,
+        width: 0,
+        height: 0
+        }
+    ],
+    groupMemberHistories: [
+        {
+        memberArtistId: 0,
+        joinDate: 0,
+        leaveDate: 0
+        }
+    ]
+}
+
+//route
+const router = useRouter();
+//state
+const personJson = ref<PersonObject>({
+    familyName: '',
+    givenName: '',
+    gender: 'F',
+    birthDate: ''
+}); //인물 등록 json data
+
+const postPersonEvent = async () => {
+    try {
+        await $fetch('/api/person', {
+            method: 'POST',
+            body: personJson.value,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        //success
+        alert('등록에 성공하였습니다.');
+        router.back();
+    } catch (error) {
+        console.error(error);
+        alert('등록에 실패하였습니다.');
+    }
+}
+
+</script>

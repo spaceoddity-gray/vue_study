@@ -73,7 +73,8 @@ import Button from '@/components/inputs/Button.vue';
 import Select from '@/components/inputs/Select.vue';
 //type
 interface TableFooterProps {
-
+    totalPage?: number;
+    currentPage?: number;
 }
 //props
 const {

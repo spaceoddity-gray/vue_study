@@ -15,7 +15,7 @@
                         </span>
                     </th>
                 </template>
-                <template v-if="moreOptions?.length > 0">
+                <template v-if="moreOptions && moreOptions.length > 0">
                     <th class="table-cell align-[inherit] text-left p-4 text-sm font-semibold text-slate-500 bg-slate-100">
                         <span>
                             
@@ -41,7 +41,7 @@
                             {{ row[part.match] || '-' }}
                         </td>
                     </template>
-                    <template v-if="moreOptions?.length > 0">
+                    <template v-if="moreOptions && moreOptions.length > 0">
                         <td class="table-cell align-[inherit] p-4 text-sm border-b border-b-slate-100">
                             <TableMoreMenu
                                 :row-index="rowIndex"
@@ -101,7 +101,7 @@ export interface ColsData {
 export interface DataTableProps {
     cols: ColsData[]; //head data
     rows?: Record<string, unknown>[] | null; //body data
-    moreOptions: TableMenuOptionObject[]; //body cell 에서 우측 끝 메뉴 옵션 활성화 여부
+    moreOptions?: TableMenuOptionObject[]; //body cell 에서 우측 끝 메뉴 옵션 활성화 여부
     loading?: boolean;
 };
 //테이블 emit 타입

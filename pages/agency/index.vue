@@ -16,7 +16,7 @@
                 type: 'button',
                 variant: 'contained',
                 label: '등록',
-                click: () => {$router.push('/person/form')}
+                click: () => {$router.push('/agency/form')}
             }
         ]"
     >

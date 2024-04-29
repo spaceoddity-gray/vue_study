@@ -16,6 +16,13 @@ export default defineNuxtConfig({
                 proxy: 'https://manager-api-dev.kpop-radar.com/api/**',
                 cors: true,
             }
+        },
+        awsAmplify: {
+            catchAllStaticFallback: true,
+            imageSettings: {
+                domains: ['main.d14o70s4v4m7g0.amplifyapp.com'],
+                dangerouslyAllowSVG: true
+            }
         }
     },
     postcss: {

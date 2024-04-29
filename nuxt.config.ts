@@ -12,8 +12,8 @@ export default defineNuxtConfig({
             }
         },
         routeRules: {
-            '/api': {
-                proxy: 'https://manager-api-dev.kpop-radar.com/api',
+            '/api/**': {
+                proxy: 'https://manager-api-dev.kpop-radar.com/api/**',
                 cors: true,
             }
         }

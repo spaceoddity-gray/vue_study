@@ -24,4 +24,7 @@ export default defineNuxtConfig({
             autoprefixer: {},
         },
     },
+    image: {
+        domains: ['main.d14o70s4v4m7g0.amplifyapp.com']
+    }
 });

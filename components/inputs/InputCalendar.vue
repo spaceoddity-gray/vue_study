@@ -12,8 +12,13 @@
                     :value="dayjs(date).format(format)"
                     @change="updateInputDate"
                     @focus="focusInput"
-                />
-                
+                >
+                    <template #startAdornment>
+                        <div class="w-6 h-6 pl-3 box-content">
+                            <CalendarIcon/>
+                        </div>
+                    </template>
+                </TextInput>
             </div>
         </div>
         <Popover
@@ -33,6 +38,7 @@
 <script setup lang="ts">
 import TextInput from './TextInput.vue';
 import Popover from '../utils/Popover.vue';
+import CalendarIcon from '../icons/CalendarIcon.vue';
 
 interface CalendarEmits {
     (event: 'change', valueObject: {date: Date, formatDate: string}): void;

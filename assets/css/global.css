@@ -75,7 +75,7 @@
         @apply leading-tight;
     }
     .default-icon-svg {
-        @apply fill-current inline-block w-full h-full select-none text-2xl;
+        @apply fill-current block w-full h-full select-none text-2xl;
     }
     .default-app-bar {
         @apply flex flex-col w-full box-border z-50 bg-white/[.8] backdrop-blur shadow;

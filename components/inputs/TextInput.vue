@@ -15,6 +15,11 @@
             {{ label }}
         </label>
         <div class="relative inline-flex items-center rounded box-border overflow-hidden">
+            <template v-if="$slots.startAdornment">
+                <div class="flex max-h-[48px]overflow-hidden items-center whitespace-nowrap text-slate-400">
+                    <slot name="startAdornment"></slot>
+                </div>
+            </template>
             <input
                 v-bind="$attrs"
                 :type="inputType"

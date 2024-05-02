@@ -3,7 +3,7 @@
         <label
             v-if="label && label !== ''"
             :for="name"
-            class="block mb-4 text-slate-500"
+            class="block mb-2 text-slate-500"
         >
                 {{ label }}
         </label>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-4">
+    <div class="mt-3">
         <p class="text-xs text-slate-400">Image List</p>
         <ul class="flex flex-wrap mt-2">
             <template v-if="currentFiles">

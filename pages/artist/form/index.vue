@@ -21,39 +21,53 @@
                     name="type"
                     row
                     label="아티스트 타입"
-                    default-value="solo"
+                    default-value="S"
                     :options="[
                         {
                             label: '솔로',
-                            value: 'solo'
+                            value: 'S'
                         },
                         {
                             label: '그룹',
-                            value: 'group'
+                            value: 'G'
                         },
                     ]"
                 />
                 <TextInput
-                    label="활동명"
+                    label="이름"
                     name="name"
                 />
+                
                 <InputCalendar
                     label="데뷔일"
                     name=""
                     format="YYYY.MM.DD"
                 />
                 <Switch
-                    label="노출 여부"
-                    name=""
+                    label="아티스트목록 표시여부"
+                    name="indexVisible"
                 />
                 <Switch
-                    label="KPOP Artist"
-                    name=""
+                    label="케이팝 가수여부"
+                    name="isKpop"
                 />
                 <Switch
-                    label="뮤직 차트 크롤링"
-                    name=""
+                    label="음악차트 크롤링 여부"
+                    name="isMusicChartCrawl"
                 />
+                <TextInput
+                    label="경로"
+                    name="path"
+                />
+                <ImageUpload
+                    label="아티스트 이미지"
+                    name="dd"
+                />
+                <Modal :open="true">
+                    <div>
+                        dasdas
+                    </div>
+                </Modal>
             </div>
         </div>
     </Contents>
@@ -83,6 +97,8 @@ import Radio from '@/components/inputs/Radio.vue';
 import InputCalendar from '@/components/inputs/InputCalendar.vue';
 import Button from '@/components/inputs/Button.vue';
 import Switch from '@/components/inputs/Switch.vue';
+import ImageUpload from '@/components/inputs/ImageUpload.vue';
+import Modal from '@/components/utils/Modal.vue';
 
 interface PersonObject {
     type: string,

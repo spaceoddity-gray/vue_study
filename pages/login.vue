@@ -7,7 +7,7 @@
             <h3 class="text-center font-bold text-primary">Login</h3>
             <form
                 class="mt-4"
-                v-on:submit.prevent="submitForm"
+                @submit.prevent="submitForm"
             >
                 <div class="grid gap-1">
                     <TextInput

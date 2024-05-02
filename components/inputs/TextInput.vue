@@ -17,11 +17,12 @@
         <div class="relative inline-flex items-center rounded box-border overflow-hidden">
             <template v-if="$slots.startAdornment">
                 <div class="flex max-h-[48px]overflow-hidden items-center whitespace-nowrap text-slate-400">
-                    <slot name="startAdornment"></slot>
+                    <slot name="startAdornment"/>
                 </div>
             </template>
             <input
                 v-bind="$attrs"
+                v-model="inputValue"
                 :type="inputType"
                 :name="name"
                 :placeholder="placeholder"
@@ -34,11 +35,10 @@
                 @blur="isFocus = false"
                 @keyup="handleKeyup"
                 @keydown="handleKeydown"
-                v-model="inputValue"
-            />
+            >
             <template v-if="$slots.endAdornment">
                 <div class="flex max-h-[48px] p-3 overflow-hidden items-center whitespace-nowrap ml-2 text-slate-400">
-                    <slot name="endAdornment"></slot>
+                    <slot name="endAdornment"/>
                 </div>
             </template>
             <fieldset

@@ -10,14 +10,14 @@
         ]"
         @click="clickTriggerEvent"
     >
-        <slot></slot>
+        <slot/>
         <span class="absolute inset-0 z-0 rounded-[inherit] overflow-hidden pointer-events-none">
             <span
                 v-for="(ripple, index) in rippleStack"
                 :key="index"
                 class="absolute w-full aspect-square rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 animate-button-ripple"
                 :style="{ top: ripple.y, left: ripple.x, backgroundColor: rippleColor }"
-            ></span>
+            />
         </span>
     </button>
 </template>

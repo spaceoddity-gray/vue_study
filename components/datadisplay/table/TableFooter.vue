@@ -2,7 +2,7 @@
     <div class="relative">
         <div class="w-full px-4 text-sm">
             <div class="flex gap-4 min-h-14 overflow-hidden">
-                <div class="flex-1"></div>
+                <div class="flex-1"/>
                 <div class="flex items-center gap-4">
                     <Select
                         label="페이지 표시 수"
@@ -77,9 +77,7 @@ interface TableFooterProps {
     currentPage?: number;
 }
 //props
-const {
-
-} = defineProps<TableFooterProps>();
+defineProps<TableFooterProps>();
 //state
 
 </script>

@@ -14,7 +14,7 @@
             :name="name"
             :label="label"
             :placeholder="placeholder"
-            :defaultValue="defaultValue"
+            :default-value="defaultValue"
             margin="none"
             class="w-full"
             @change="(v) => searchValue.keyword = v"

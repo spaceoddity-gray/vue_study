@@ -2,7 +2,13 @@ import { defineNuxtConfig } from "nuxt/config"
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
-    modules: ['@nuxt/image', '@nuxtjs/tailwindcss', "@samk-dev/nuxt-vcalendar", "dayjs-nuxt"],
+    modules: [
+        '@nuxt/eslint',
+        '@nuxt/image',
+        '@nuxtjs/tailwindcss',
+        "@samk-dev/nuxt-vcalendar",
+        "dayjs-nuxt",
+    ],
     css: ['~/assets/css/global.css'],
     nitro: {
         devProxy: {
@@ -33,5 +39,5 @@ export default defineNuxtConfig({
     },
     image: {
         domains: ['main.d14o70s4v4m7g0.amplifyapp.com']
-    }
+    },
 });

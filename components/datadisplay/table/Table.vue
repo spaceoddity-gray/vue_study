@@ -17,9 +17,7 @@
                 </template>
                 <template v-if="moreOptions && moreOptions.length > 0">
                     <th class="table-cell align-[inherit] text-left p-4 text-sm font-semibold text-slate-500 bg-slate-100">
-                        <span>
-                            
-                        </span>
+                        <span/>
                     </th>
                 </template>
             </tr>

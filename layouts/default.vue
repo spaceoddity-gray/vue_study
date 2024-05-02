@@ -52,14 +52,14 @@
                         <hr
                             v-if="index + 1 < asideJson.length"
                             class="my-2"
-                        />
+                        >
                     </template>
                 </Menu>
             </div>
         </Drawer>
         <div class="relative flex-1 mt-16 pt-9 pb-12 bg-slate-50/[0.4] overflow-hidden">
             <Container>
-                <slot></slot>
+                <slot/>
             </Container>
         </div>
     </div>

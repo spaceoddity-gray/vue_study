@@ -1,10 +1,10 @@
 <template>
     <div>
         <div
-            @click="toggle"
             class="cursor-pointer"
+            @click="toggle"
             >
-            <slot name="summary"></slot>
+            <slot name="summary"/>
         </div>
         <div
             ref="detailsContainer"
@@ -12,7 +12,7 @@
             :style="{height: isTransitionEnd ? 'auto' : isOpen ? `${detailsHeight}px` : '0px'}"
         >
         <div ref="detailsContent">
-            <slot name="details"></slot>
+            <slot name="details"/>
         </div>
         </div>
     </div>

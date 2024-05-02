@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="relative w-full mt-10 px-4 py-6 box-border shadow-md bg-white">
-        <slot></slot>
+        <slot/>
     </div>
 </template>
 

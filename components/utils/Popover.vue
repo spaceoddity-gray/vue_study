@@ -10,8 +10,7 @@
                     <div
                         class="fixed flex -z-[1] items-center justify-center bg-transparent inset-0 cursor-pointer"
                         @click="onClose"
-                    >
-                    </div>
+                    />
                     <div
                         class="absolute z-[1] overflow-x-hidden overflow-y-auto max-w-[calc(100%-32px)] max-h-[calc(100%-32px)] outline-0 min-w-4 min-h-4 rounded-md bg-white shadow-lg"
                         :style="[
@@ -20,7 +19,7 @@
                             {minWidth: anchorWidth + 'px'}
                         ]"
                     >
-                        <slot></slot>
+                        <slot/>
                     </div>
                 </div>
             </div>

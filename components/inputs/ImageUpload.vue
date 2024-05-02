@@ -29,7 +29,7 @@
                     :multiple="multiple"
                     class="absolute top-0 left-0 opacity-0 w-full h-full cursor-pointer"
                     @change="updateFile"
-                />
+                >
             </div>
         </div>
     </div>

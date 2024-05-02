@@ -54,7 +54,7 @@
                             :label="item.label"
                             :deps="item?.deps"
                             :path="item?.path"
-                            :depsIndex="(Number(depsIndex) + 1)"
+                            :deps-index="(Number(depsIndex) + 1)"
                         />
                     </ul>
                 </template>

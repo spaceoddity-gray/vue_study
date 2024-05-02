@@ -63,11 +63,6 @@
                     label="아티스트 이미지"
                     name="dd"
                 />
-                <Modal :open="true">
-                    <div>
-                        dasdas
-                    </div>
-                </Modal>
             </div>
         </div>
     </Contents>
@@ -98,7 +93,6 @@ import InputCalendar from '@/components/inputs/InputCalendar.vue';
 import Button from '@/components/inputs/Button.vue';
 import Switch from '@/components/inputs/Switch.vue';
 import ImageUpload from '@/components/inputs/ImageUpload.vue';
-import Modal from '@/components/utils/Modal.vue';
 
 interface PersonObject {
     type: string,

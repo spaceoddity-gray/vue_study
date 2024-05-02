@@ -3,8 +3,8 @@
         <template v-if="isVisible">
             <div
                 :class="[
-                    'fixed w-full h-full z-[1300] inset-0 transition-opacity',
-                    `${isOpen ? 'opacity-1' : 'opacity-0'}`
+                    'fixed w-full h-full z-[1300] inset-0 opacity-0',
+                    `${isOpen ? 'animate-fade-in' : 'animate-fade-out'}`
                 ]"
             >
                 <div
@@ -35,10 +35,14 @@ const props = defineProps<ModalProps>();
 //state
 const isOpen = ref<boolean>(Boolean(props.open));
 const isVisible = ref<boolean>(Boolean(props.open));
+const ableClick = ref(true);
 
 //close event
 const onClose = () => {
-    emit('close-modal');
+    if(ableClick)
+    {
+        emit('close-modal');
+    }
 }
 
 //document scroll control
@@ -63,12 +67,19 @@ onMounted(() => {
 });
 
 //use effect
-watch(isOpen, (newOpen) => {
-    isVisible.value = newOpen;
+watch(() => props.open, (newOpen) => {
+    isOpen.value = newOpen;
 });
-
-watch(isVisible, (newOpen) => {
-    isVisible.value = newOpen;
+watch(isOpen, (newOpen) => {
+    if(!newOpen) {
+        ableClick.value = false;
+        setTimeout(() => {
+            isVisible.value = newOpen;
+            ableClick.value = true;
+        }, 150);
+    } else {
+        isVisible.value = newOpen;
+    }
 });
 
 onUnmounted(() => {

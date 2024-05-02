@@ -42,7 +42,7 @@
                             value: 'M'
                         },
                     ]"
-                    @change="(v) => personJson.gender = v as 'F' | 'M'"
+                    @change="(v) => {personJson.gender = v as 'F' | 'M'}"
                 />
                 <InputCalendar
                     label="생년월일"

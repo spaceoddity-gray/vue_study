@@ -19,18 +19,15 @@
                         class="absolute cursor-[inherit] opacity-0 h-full top-0 left-0 z-[1]"
                         :checked="isChecked"
                         @change="updateChecked"
-                    />
-                    <span class="bg-current rounded-[50%] w-[22px] h-[22px] box-border shadow-md">
-    
-                    </span>
+                    >
+                    <span class="bg-current rounded-[50%] w-[22px] h-[22px] box-border shadow-md"/>
                 </span>
                 <span
                     :class="[
                         'w-full h-full -z-[1] rounded-[13px] transition duration-300',
                         isChecked ? 'bg-primary' : 'bg-slate-200'
                     ]"
-                >
-                </span>
+                />
             </span>
         </div>
     </label>

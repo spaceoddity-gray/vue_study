@@ -1,11 +1,11 @@
 <template>
     <div
+        ref="selectEl"
         :class="[
             'default-select',
             margin === 'normal' ? 'mt-4 mb-2' : margin === 'dense' && 'mt-2 mb-1',
             $attrs.class
         ]"
-        ref="selectEl"
     >
         <label
             :class="[
@@ -28,12 +28,12 @@
             </div>
             <input
                 v-bind="$attrs"
+                v-model="selectedValue"
                 type="text"
                 class="absolute opacity-0 pointer-events-none bottom-0 left-0 w-full box-border"
                 @focus="isFocus = true"
                 @blur="isFocus = false"
-                v-model="selectedValue"
-            />
+            >
             <div
                 class="absolute w-2 h-2 right-[12px] transition-transform"
                 :style="{transform: isFocus ? 'rotate(0deg)' : 'rotate(180deg)'}"

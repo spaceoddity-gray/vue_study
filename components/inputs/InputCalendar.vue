@@ -23,12 +23,12 @@
         </div>
         <Popover
         :open="isPickerOpen"
-        :anchorEl="pickerEl"
-        @close-popover="closeCalendar"
+        :anchor-el="pickerEl"
         :anchor-origin="{
             horizontal: 'center',
             vertical: 'bottom'
         }"
+        @close-popover="closeCalendar"
         >
             <v-date-picker v-model="date" />
         </Popover>

@@ -1,6 +1,6 @@
 <template>
     <div class="relative inline-flex flex-col">
-        <label v-if="label" class="relative text-slate-500">{{ label }}</label>
+        <label v-if="label" class="relative text-sm text-slate-600">{{ label }}</label>
         <div
             class="flex"
             :style="[

@@ -10,7 +10,7 @@
         <label
             :class="[
                 'absolute z-[1] inset-0 h-fit overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none select-none scale-100 transition-text-input-label origin-top-left translate-x-[16px] pr-8',
-                isFocus ? 'text-blue-500' : 'text-slate-500',
+                isFocus ? 'text-blue-500' : 'text-slate-600',
                 isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : `max-w-[calc(100%-24px)] ${size === 'small' ? 'translate-y-2.5' : size === 'medium' ? 'translate-y-3' : 'translate-y-2.5'} scale-100`
             ]"
         >

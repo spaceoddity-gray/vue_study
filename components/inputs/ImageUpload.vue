@@ -3,7 +3,7 @@
         <label
             v-if="label && label !== ''"
             :for="name"
-            class="block mb-2 text-slate-500"
+            class="block mb-2 text-sm text-slate-600"
         >
                 {{ label }}
         </label>

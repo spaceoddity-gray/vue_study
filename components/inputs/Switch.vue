@@ -1,7 +1,7 @@
 <template>
     <label class="inline-flex flex-col justify-center align-middle cursor-pointer">
         <template v-if="label">
-            <div class="text-slate-500">
+            <div class="text-sm text-slate-600">
                 {{ label }}
             </div>
         </template>

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <Head>
         <Title>Blip 어드민</Title>

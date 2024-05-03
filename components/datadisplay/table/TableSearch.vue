@@ -54,8 +54,7 @@ interface SendObjectEmit {
 
 //emit type
 interface TableSearchEmits {
-    (event: 'change', value: SendObjectEmit): void;
-    (event: 'submit', value: SendObjectEmit): void;
+    (event: 'search-change' | 'search-submit', value: SendObjectEmit): void;
 }
 //props type
 export interface TableSearchProps {
@@ -70,6 +69,9 @@ export interface TableSearchProps {
 const props = withDefaults(defineProps<TableSearchProps>(), {
     name: 'search',
     label: '검색',
+    placeholder: '',
+    defaultValue: '',
+    selectOptions: undefined,
 });
 //emits
 const emit = defineEmits<TableSearchEmits>();
@@ -85,7 +87,7 @@ const sendSearchValue = () => {
     const { value } = searchValue;
 
     //emit
-    emit('submit', value);
+    emit('search-submit', value);
 };
 
 //enter event
@@ -97,8 +99,8 @@ const enterEvent = (e: KeyboardEvent) => {
     }
 };
 
-watch(searchValue, (newV, oldV) => {
-    emit('change', newV);
+watch(searchValue, (newV) => {
+    emit('search-change', newV);
 });
 
 </script>

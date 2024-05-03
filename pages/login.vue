@@ -76,7 +76,7 @@ const submitForm = async (e: Event) => {
         const formdData = new FormData(data);
         const formDataObject = Object.fromEntries(formdData.entries());
     
-        const res = await $fetch('/api/user/session', {
+        await $fetch('/api/user/session', {
             method: 'POST',
             body: formDataObject,
             headers: {

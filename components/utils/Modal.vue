@@ -10,9 +10,8 @@
                 <div
                     class="fixed flex items-center justify-center inset-0 bg-black/[0.5] -z-[1]"
                     @click="onClose"
-                >
-                </div>
-                <slot></slot>
+                />
+                <slot/>
             </div>
         </template>
     </Teleport>
@@ -39,7 +38,7 @@ const ableClick = ref(true);
 
 //close event
 const onClose = () => {
-    if(ableClick)
+    if(ableClick.value)
     {
         emit('close-modal');
     }

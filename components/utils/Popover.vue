@@ -57,15 +57,14 @@ const props = withDefaults(defineProps<PopoverProps>(), {
             vertical: 'top'
         }
     },
+    anchorEl: undefined,
 });
 //emit
 const emit = defineEmits<PopoverEmits>()
 //state
-const contentEl = ref(null);
 const isVisible = ref(Boolean(props.open)); //popover 활성화 여부
 const anchorWidth = ref(0);
 const anchorPos = ref({ vertical: 0, horizontal: 0 });
-const transformPos = ref({ vertical: 0, horizontal: 0 });
 
 //close event
 const onClose = () => {

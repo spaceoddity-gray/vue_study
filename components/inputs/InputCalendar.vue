@@ -54,6 +54,7 @@ interface CalendarProps {
 const props = withDefaults(defineProps<CalendarProps>(), {
     format: 'YYYY-MM-DD',
     label: 'calendar',
+    defaultDate: undefined,
 });
 const emit = defineEmits<CalendarEmits>();
 //moment
@@ -90,7 +91,7 @@ onMounted(() => {
     updateEmit(date.value);
 });
 
-watch(date, (newDate, oldDate) => {
+watch(date, (newDate) => {
     updateEmit(newDate);
 });
 </script>

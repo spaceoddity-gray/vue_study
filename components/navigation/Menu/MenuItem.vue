@@ -75,6 +75,7 @@
 </template>
 
 <script setup lang="ts">
+// eslint-disable-next-line import/no-self-import
 import MenuItem from './MenuItem.vue';
 import Accordion from '@/components/surfaces/Accordion.vue';
 

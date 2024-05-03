@@ -81,9 +81,11 @@ interface ImageUploadProps {
     multiple?: boolean; //다중 업로드 여부
 }
 
-const props = withDefaults(defineProps<ImageUploadProps>(), {
+withDefaults(defineProps<ImageUploadProps>(), {
     width: 300,
     height: 130,
+    label: undefined,
+    placeholder: '',
     objectFit: 'contain',
 });
 //state

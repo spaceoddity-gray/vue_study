@@ -68,8 +68,7 @@ type BaseInputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 
 interface TextInputEmits {
     (event: 'change', value: string): void;
     (event: 'focus', isFocused: boolean): void;
-    (event: 'keydown', e: KeyboardEvent): void,
-    (event: 'keyup', e: KeyboardEvent): void
+    (event: 'keydown' | 'keyup', value: KeyboardEvent): void;
 }
 
 interface TextInputProps {

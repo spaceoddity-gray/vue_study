@@ -3,6 +3,7 @@
         <ol class="flex flex-wrap items-center">
             <template
                 v-for="({ pathName, asPath }, index) in routes"
+                :key="index"
             >
                 <li>
                     <NuxtLink

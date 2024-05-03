@@ -5,6 +5,7 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
+    "eslint.workingDirectories": [ {"mode": "auto"} ],
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.tabSize": 4,
     "editor.quickSuggestions": {
@@ -15,5 +16,12 @@
     "emmet.syntaxProfiles":{
 		"vue-html":"html",
 		"vue":"html"
-    }
+    },
+    "eslint.enable": true,
+    "eslint.validate": [
+        "vue",
+        "html",
+        "javascript",
+        "typescript"
+    ]
 }

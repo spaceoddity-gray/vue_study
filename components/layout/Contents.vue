@@ -15,7 +15,7 @@
             />
         </div>
         <div v-if="buttons && buttons.length > 0" class="flex gap-2">
-            <template v-for="(btn) in buttons">
+            <template v-for="(btn, btnIdx) in buttons" :key="btnIdx">
                 <Button
                     :type="btn.type"
                     :variant="btn.variant"
@@ -55,7 +55,7 @@ const {
     buttons,
 } = defineProps<ContentsProps>();
 
-const clickEvent = (e: any, callbackEvent?: (e: any) => void) => {
+const clickEvent = (e: Event, callbackEvent?: (e: Event) => void) => {
     if(typeof callbackEvent === 'function') {
         callbackEvent(e)
     }

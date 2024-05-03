@@ -74,6 +74,9 @@
         @apply text-xs md:text-sm xl:text-base;
         @apply leading-tight;
     }
+    .default-text-input {
+        @apply relative inline-flex flex-col rounded bg-white;
+    }
     .default-icon-svg {
         @apply fill-current block w-full h-full select-none text-2xl;
     }
@@ -94,6 +97,15 @@
     }
     .default-table-tr {
         @apply table-row text-inherit border-b border-slate-100 align-middle outline-0 text-sm;
+    }
+    .default-transfer-list-wrap {
+        @apply inline-flex flex-wrap py-5 px-6 items-center rounded box-border border bg-slate-100 overflow-hidden;
+    }
+    .default-transfer-list-box {
+        @apply rounded bg-white shadow-md overflow-auto;
+    }
+    .default-transfer-list-item {
+        @apply grid min-h-3 px-4 py-1 hover:bg-slate-100 transition;
     }
 }
 

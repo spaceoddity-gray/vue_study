@@ -36,11 +36,7 @@ export interface ButtonProps {
     disabled?: boolean;
 }
 //props
-const {
-    type,
-    variant,
-    disabled,
-} = defineProps<ButtonProps>();
+const props = defineProps<ButtonProps>();
 const emit = defineEmits(['click']);
 //state
 const btnDom = ref<HTMLElement | null>(null);
@@ -74,13 +70,22 @@ const clickTriggerEvent = (e: MouseEvent) => {
 onMounted(() => {
     if (!btnDom.value) return;
 
-    const btncolor = window.getComputedStyle(btnDom.value).backgroundColor;
+    if(props.variant === 'contained')
+    {
+        const btncolor = window.getComputedStyle(btnDom.value).backgroundColor;
+        const rgb = btncolor.match(/\d+/g);
 
-    const rgb = btncolor.match(/\d+/g);
-    if (rgb) {
-        const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-        rippleColor.value = brightness > 128 ? '#535353' : '#fff';
+        if (rgb) {
+            const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+            rippleColor.value = brightness > 128 ? '#535353' : '#fff';
+        }
+    } else if (props.variant === 'outlined') {
+        const btncolor = window.getComputedStyle(btnDom.value).borderColor;
+        rippleColor.value = btncolor;
+    } else {
+        rippleColor.value = '#535353';
     }
+
 });
 
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div
         :class="[
-            'relative inline-flex flex-col',
+            'default-text-input',
             margin === 'normal' ? 'mt-4 mb-2' : margin === 'dense' && 'mt-2 mb-1'
         ]"
     >
@@ -14,7 +14,7 @@
         >
             {{ label }}
         </label>
-        <div class="relative inline-flex items-center rounded box-border overflow-hidden">
+        <div class="relative inline-flex items-center rounded-[inherit] box-border overflow-hidden">
             <template v-if="$slots.startAdornment">
                 <div class="flex max-h-[48px]overflow-hidden items-center whitespace-nowrap text-slate-400">
                     <slot name="startAdornment"/>

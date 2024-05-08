@@ -77,13 +77,13 @@ onMounted(() => {
 
         if (rgb) {
             const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-            rippleColor.value = brightness > 128 ? '#535353' : '#fff';
+            rippleColor.value = brightness > 128 ? '#64748bcc' : '#fff';
         }
     } else if (props.variant === 'outlined') {
         const btncolor = window.getComputedStyle(btnDom.value).borderColor;
         rippleColor.value = btncolor;
     } else {
-        rippleColor.value = '#535353';
+        rippleColor.value = '#64748bcc';
     }
 
 });

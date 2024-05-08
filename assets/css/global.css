@@ -105,7 +105,7 @@
         @apply rounded bg-white shadow-md overflow-auto scrollbar-hide;
     }
     .default-transfer-list-item {
-        @apply grid min-h-3 px-4 py-1 hover:bg-slate-100 transition;
+        @apply grid hover:bg-slate-100 transition;
     }
 }
 

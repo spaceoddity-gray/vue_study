@@ -1,8 +1,13 @@
 <template>
-    <ImageUpload name="test" placeholder="파일을 업로드"/>
+    <TLAgency
+        label="데이터 옮기기 컴포넌트 테스트"
+        
+    />
 </template>
 
 <script setup lang="ts">
-import ImageUpload from '@/components/inputs/ImageUpload.vue';
+import TLAgency from '@/components/inputs/transferList/template/TLAgency.vue';
+
+
 
 </script>

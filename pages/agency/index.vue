@@ -37,9 +37,11 @@ import Contents from '@/components/layout/Contents.vue';
 import Table from '@/components/datadisplay/table/Table.vue';
 //type
 import type { TableMenuOptionCallback } from '@/components/datadisplay/table/TableMoreMenu.vue';
+import type { PersonDbObject } from './form/index.vue';
+
 
 //state
-const rowData = ref<Record<string, unknown>[] | null>(null);
+const rowData = ref<PersonDbObject[] | null>(null);
 const loading = ref(true);
 
 const tableCols = [
@@ -59,7 +61,7 @@ const tableCols = [
 
 const getAgencyData = async () => {
     try {
-        const res: Record<string, unknown>[] = await $fetch('/api/agency', {
+        const res: PersonDbObject[] = await $fetch('/api/agency', {
             method: 'GET'
         });
 

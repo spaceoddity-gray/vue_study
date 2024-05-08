@@ -59,6 +59,11 @@ interface PersonObject {
     description: string;
 }
 
+export interface  PersonDbObject extends PersonObject {
+    id?: number;
+    regTime: Date;
+}
+
 //route
 const router = useRouter();
 //state

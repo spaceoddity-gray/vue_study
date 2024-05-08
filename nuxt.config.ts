@@ -13,13 +13,13 @@ export default defineNuxtConfig({
     nitro: {
         devProxy: {
             "/api": {
-                target: "https://manager-api-dev.kpop-radar.com/api",
+                target: process.env.NUXT_API_URL,
                 changeOrigin: true,
             }
         },
         routeRules: {
             '/api/**': {
-                proxy: 'https://manager-api-dev.kpop-radar.com/api/**',
+                proxy: process.env.NUXT_API_URL + '/**',
                 cors: true,
             }
         },

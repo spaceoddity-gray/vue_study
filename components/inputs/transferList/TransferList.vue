@@ -29,7 +29,7 @@
                                 <Button
                                     type="button"
                                     class="min-w-0 min-h-3 px-4 py-1 justify-start font-normal text-left"
-                                    @click="() => saveSelectEvent(beforeData, beforeIndex)"
+                                    @click="() => selectEvent(beforeData, beforeIndex)"
                                 >
                                     <template v-if="beforeViewList">
                                         <div
@@ -67,7 +67,7 @@
                     type="button"
                     variant="outlined"
                     class="py-2 px-4 min-w-0"
-                    @click="unConfirmEvent"
+                    @click="refuteEvent"
                 >
                     <div class="w-[20px]">
                         <ChevronLeft/>
@@ -90,11 +90,13 @@
                             <li
                                 v-for="(confirmItem, confirmIndex) in confirmList"
                                 :key="confirmIndex"
-                                class="default-transfer-list-item"
+                                class="relative [&:not(:last-child)]:border-b border-slate-100 default-transfer-list-item transition-colors"
+                                :style="{ backgroundColor: refuteSelectList.some((sl) => sl.index === confirmItem.index) ? '#ff324b44' : '' }"
                             >
                                 <Button
                                     type="button"
                                     class="min-w-0 min-h-3 px-4 py-1 justify-start font-normal text-left"
+                                    @click="() => unselectEvent(confirmItem)"
                                 >
                                     <template v-if="afterViewList">
                                         <div
@@ -134,11 +136,17 @@ import TextInput from '../TextInput.vue';
 import ChevronLeft from '@/components/icons/ChevronLeft.vue';
 import ChevronRight from '@/components/icons/ChevronRight.vue';
 
+//선택한 데이터의 객체 타입
+export interface TransferSelectObject<T> {
+    data: T;
+    index: number;
+}
+//데이터와 매칭해서 보여줄 옵션 객체
 export interface ViewListObject<T> {
     label: string;
     match: keyof T;
 };
-
+//기본 props
 export interface TransferListProps<T>{
     label?: string;
     search?: boolean;
@@ -150,28 +158,22 @@ export interface TransferListProps<T>{
     afterList?: T[] | null;
     afterViewList?: ViewListObject<T>[] | null;
 };
-
-interface TransferListEmits {
-    (event: 'select-change'): void;
-}
-
-interface TransferSelectObject<T> {
-    data: T;
-    index: number;
+//emits props
+export interface TransferListEmits<T> {
+    (event: 'select-change', value: TransferSelectObject<T>[]): void;
 }
 
 const props = defineProps<TransferListProps<T>>();
 
-defineEmits<TransferListEmits>();
+const emit = defineEmits<TransferListEmits<T>>();
 
 //state
-const selectList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>;
-const confirmList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>;
-
-console.log(selectList)
+const selectList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //추가 선택하려는 값 리스트
+const refuteSelectList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //선택 해제 하려는 값 리스트
+const confirmList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //최종 선택된 리스트
 
 //add select
-const saveSelectEvent = (data: T, index: number) => {
+const selectEvent = (data: T, index: number) => {
     //conv data
     const json = {
         data,
@@ -185,15 +187,36 @@ const saveSelectEvent = (data: T, index: number) => {
     }
 }
 
-//move
+//add unselect
+const unselectEvent = (data: TransferSelectObject<T>) => {
+    if(props.multiple)
+    {
+        refuteSelectList.value.push(data)
+    } else {
+        refuteSelectList.value = [data];
+    }
+}
+
+//confirm
 const confirmEvent = () => {
     confirmList.value = selectList.value;
     //reset
     selectList.value = [];
 }
 
-const unConfirmEvent = () => {
+//refute
+const refuteEvent = () => {
+    const excludeIndices = refuteSelectList.value.map(item => item.index);
+    const result = confirmList.value.filter(item => !excludeIndices.includes(item.index));
 
+    confirmList.value = result;
+    //reset
+    selectList.value = [];
+    refuteSelectList.value = [];
 }
+
+watch(confirmList, (newValue) => {
+    emit('select-change', newValue)
+})
 
 </script>

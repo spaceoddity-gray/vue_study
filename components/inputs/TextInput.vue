@@ -118,7 +118,6 @@ watch(() => props.value, (newValue) => {
 });
 
 watch(() => props.type, (newType) => {
-    console.log(newType);
     inputType.value = newType;
 });
 

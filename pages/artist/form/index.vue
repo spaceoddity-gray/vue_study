@@ -63,6 +63,9 @@
                     label="아티스트 이미지"
                     name="dd"
                 />
+                <TLAgency
+                    label="소속사"
+                />
             </div>
         </div>
     </Contents>
@@ -93,6 +96,7 @@ import InputCalendar from '@/components/inputs/InputCalendar.vue';
 import Button from '@/components/inputs/Button.vue';
 import Switch from '@/components/inputs/Switch.vue';
 import ImageUpload from '@/components/inputs/ImageUpload.vue';
+import TLAgency from '@/components/inputs/transferList/template/TLAgency.vue';
 
 interface PersonObject {
     type: string,

@@ -59,12 +59,18 @@
                     label="경로"
                     name="path"
                 />
-                <ImageUpload
+                <TextInputImage
                     label="아티스트 이미지"
-                    name="dd"
+                    name="artistImage"
+                    default-src="https://image.bugsm.co.kr/artist/images/1000/200224/20022492.jpg"
+                />
+                <TextInputImage
+                    label="썸네일 이미지"
+                    name="thumbnail"
                 />
                 <TLAgency
                     label="소속사"
+                    unique-index-key="id"
                 />
             </div>
         </div>
@@ -95,10 +101,10 @@ import Radio from '@/components/inputs/Radio.vue';
 import InputCalendar from '@/components/inputs/InputCalendar.vue';
 import Button from '@/components/inputs/Button.vue';
 import Switch from '@/components/inputs/Switch.vue';
-import ImageUpload from '@/components/inputs/ImageUpload.vue';
+import TextInputImage from '@/components/inputs/TextInputImage.vue';
 import TLAgency from '@/components/inputs/transferList/template/TLAgency.vue';
 
-interface PersonObject {
+interface ArtistFormObject {
     type: string,
     name: string,
     gender: string,
@@ -139,12 +145,7 @@ interface PersonObject {
 //route
 const router = useRouter();
 //state
-const personJson = ref<PersonObject>({
-    familyName: '',
-    givenName: '',
-    gender: 'F',
-    birthDate: ''
-}); //인물 등록 json data
+const personJson = ref<ArtistFormObject>(); //인물 등록 json data
 
 const postPersonEvent = async () => {
     try {

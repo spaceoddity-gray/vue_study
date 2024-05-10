@@ -8,45 +8,32 @@
         <div class="default-transfer-list-wrap">
             <div>
                 <template v-if="search">
-                    <TextInput
-                        label="검색"
-                        name="beforeListSearch"
-                        placeholder="값을 선택"
-                        size="small"
-                        class="w-full"
-                    />
+                    <div
+                        class="pt-4 mb-3 overflow-hidden"
+                        :style="{ width: width + 'px'}"
+                    >
+                        <TransferListSearch
+                            :view-list="beforeViewList"
+                        />
+                    </div>
                 </template>
-                <div class="default-transfer-list-box w-[200px] h-[230px]">
+                <div
+                    class="default-transfer-list-box"
+                    :style="{ width: width + 'px', height: height + 'px' }"
+                >
                     <ul class="py-2">
                         <template v-if="beforeList">
                             <li
                                 v-for="(beforeData, beforeIndex) in beforeList"
                                 :key="beforeIndex"
                                 class="relative [&:not(:last-child)]:border-b border-slate-100 default-transfer-list-item transition-colors"
-                                :style="{ backgroundColor: selectList.some((sl) => sl.index === beforeIndex) ? '#ff324b44' : '' }"
-
+                                :style="{ backgroundColor: selectList.some((sl) => sl[uniqueIndexKey as keyof T] === beforeData[uniqueIndexKey as keyof T]) ? '#ff324b44' : '' }"
                             >
-                                <Button
-                                    type="button"
-                                    class="min-w-0 min-h-3 px-4 py-1 justify-start font-normal text-left"
-                                    @click="() => selectEvent(beforeData, beforeIndex)"
-                                >
-                                    <template v-if="beforeViewList">
-                                        <div
-                                            v-for="(beforeView, beforeViewListIndex) in beforeViewList"
-                                            :key="beforeViewListIndex"
-                                        >
-                                            <p class="text-xs text-slate-300">{{ beforeView.label }}</p>
-                                            <p class="text-sm">{{ beforeData[beforeView.match] }}</p>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div>
-                                            <p class="text-xs text-slate-300">no named</p>
-                                            <p>-</p>
-                                        </div>
-                                    </template>
-                                </Button>
+                                <TrnasferItem
+                                    :data="beforeData"
+                                    :view-list="beforeViewList"
+                                    @click="selectEvent"
+                                />
                             </li>
                         </template>
                     </ul>
@@ -76,44 +63,30 @@
             </div>
             <div>
                 <template v-if="search">
-                    <TextInput
-                        label="선택 검색"
-                        name="afterListSearch"
-                        placeholder="선택값을 검색"
-                        size="small"
-                        class="w-full"
-                    />
+                    <div
+                        class="pt-4 mb-3 overflow-hidden"
+                        :style="{ width: width + 'px'}"
+                    >
+                        <TransferListSearch/>
+                    </div>
                 </template>
-                <div class="default-transfer-list-box w-[200px] h-[230px]">
+                <div
+                    class="default-transfer-list-box"
+                    :style="{ width: width + 'px', height: height + 'px' }"
+                >
                     <template v-if="confirmList.length > 0">
                         <ul class="py-2">
                             <li
                                 v-for="(confirmItem, confirmIndex) in confirmList"
                                 :key="confirmIndex"
                                 class="relative [&:not(:last-child)]:border-b border-slate-100 default-transfer-list-item transition-colors"
-                                :style="{ backgroundColor: refuteSelectList.some((sl) => sl.index === confirmItem.index) ? '#ff324b44' : '' }"
+                                :style="{ backgroundColor: refuteSelectList.some((sl) => sl[uniqueIndexKey as keyof T] === confirmItem[uniqueIndexKey as keyof T]) ? '#ff324b44' : '' }"
                             >
-                                <Button
-                                    type="button"
-                                    class="min-w-0 min-h-3 px-4 py-1 justify-start font-normal text-left"
-                                    @click="() => unselectEvent(confirmItem)"
-                                >
-                                    <template v-if="afterViewList">
-                                        <div
-                                            v-for="(afterView, afterViewListIndex) in afterViewList"
-                                            :key="afterViewListIndex"
-                                        >
-                                            <p class="text-xs text-slate-300">{{ afterView.label }}</p>
-                                            <p class="text-sm">{{ confirmItem.data[afterView.match] }}</p>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div>
-                                            <p class="text-xs text-slate-300">no named</p>
-                                            <p>-</p>
-                                        </div>
-                                    </template>
-                                </Button>
+                                <TrnasferItem
+                                    :data="confirmItem"
+                                    :view-list="afterViewList"
+                                    @click="unselectEvent"
+                                />
                             </li>
                         </ul>
                     </template>
@@ -132,22 +105,19 @@
 
 <script setup lang="ts" generic="T = Record<string, unknown>">
 import Button from '../Button.vue';
-import TextInput from '../TextInput.vue';
 import ChevronLeft from '@/components/icons/ChevronLeft.vue';
 import ChevronRight from '@/components/icons/ChevronRight.vue';
+import TrnasferItem from './TrnasferItem.vue';
+import TransferListSearch from './TransferListSearch.vue';
 
-//선택한 데이터의 객체 타입
-export interface TransferSelectObject<T> {
-    data: T;
-    index: number;
-}
 //데이터와 매칭해서 보여줄 옵션 객체
 export interface ViewListObject<T> {
     label: string;
     match: keyof T;
 };
 //기본 props
-export interface TransferListProps<T>{
+export interface TransferListProps<T> {
+    uniqueIndexKey: keyof T;
     label?: string;
     search?: boolean;
     multiple?: boolean;
@@ -160,35 +130,40 @@ export interface TransferListProps<T>{
 };
 //emits props
 export interface TransferListEmits<T> {
-    (event: 'select-change', value: TransferSelectObject<T>[]): void;
+    (event: 'select-change', value: T[]): void;
+    (event: 'before-search'): void;
 }
 
-const props = defineProps<TransferListProps<T>>();
+const props = withDefaults(defineProps<TransferListProps<T>>(), {
+    label: 'TransferList',
+    width: 380,
+    height: 340,
+    beforeList: null,
+    beforeViewList: null,
+    afterList: null,
+    afterViewList: null,
+}) ;
 
 const emit = defineEmits<TransferListEmits<T>>();
+    
 
 //state
-const selectList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //추가 선택하려는 값 리스트
-const refuteSelectList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //선택 해제 하려는 값 리스트
-const confirmList = ref<TransferSelectObject<T>[]>([]) as Ref<TransferSelectObject<T>[]>; //최종 선택된 리스트
+const selectList = ref<T[]>([]) as Ref<T[]>; //추가 선택하려는 값 리스트
+const refuteSelectList = ref<T[]>([]) as Ref<T[]>; //선택 해제 하려는 값 리스트
+const confirmList = ref<T[]>(props.afterList || []) as Ref<T[]>; //최종 선택된 리스트
 
 //add select
-const selectEvent = (data: T, index: number) => {
-    //conv data
-    const json = {
-        data,
-        index,
-    }
+const selectEvent = (data: T) => {
     if(props.multiple)
     {
-        selectList.value.push(json)
+        selectList.value.push(data)
     } else {
-        selectList.value = [json];
+        selectList.value = [data];
     }
 }
 
 //add unselect
-const unselectEvent = (data: TransferSelectObject<T>) => {
+const unselectEvent = (data: T) => {
     if(props.multiple)
     {
         refuteSelectList.value.push(data)
@@ -206,8 +181,8 @@ const confirmEvent = () => {
 
 //refute
 const refuteEvent = () => {
-    const excludeIndices = refuteSelectList.value.map(item => item.index);
-    const result = confirmList.value.filter(item => !excludeIndices.includes(item.index));
+    const excludeIndices = refuteSelectList.value.map(item => item[props.uniqueIndexKey]);
+    const result = confirmList.value.filter(item => !excludeIndices.includes(item[props.uniqueIndexKey]));
 
     confirmList.value = result;
     //reset

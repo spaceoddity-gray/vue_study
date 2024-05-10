@@ -1,7 +1,8 @@
 <template>
     <TLAgency
         label="데이터 옮기기 컴포넌트 테스트"
-        
+        unique-index-key="id"
+        search
     />
 </template>
 

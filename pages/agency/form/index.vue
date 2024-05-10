@@ -54,12 +54,12 @@ import Contents from '@/components/layout/Contents.vue';
 import TextInput from '@/components/inputs/TextInput.vue';
 import Button from '@/components/inputs/Button.vue';
 
-interface PersonObject {
+interface AgencyObject {
     name: string;
     description: string;
 }
 
-export interface  PersonDbObject extends PersonObject {
+export interface  AgencyDBObject extends AgencyObject {
     id?: number;
     regTime: Date;
 }
@@ -67,7 +67,7 @@ export interface  PersonDbObject extends PersonObject {
 //route
 const router = useRouter();
 //state
-const agencyJson = ref<PersonObject>({
+const agencyJson = ref<AgencyObject>({
     name: '',
     description: '',
 }); //인물 등록 json data

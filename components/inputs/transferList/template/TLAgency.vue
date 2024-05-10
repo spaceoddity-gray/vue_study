@@ -1,6 +1,6 @@
 <template>
     <TransferList
-        :label="label"
+        v-bind="props"
         :before-list="data"
         :before-view-list="viewJson"
         :after-view-list="viewJson"
@@ -10,27 +10,27 @@
 <script setup lang="ts">
 import TransferList from '../TransferList.vue';
 import type { ViewListObject, TransferListProps } from '../TransferList.vue';
-import type { PersonDbObject } from '@/pages/agency/form/index.vue';
+import type { AgencyDBObject } from '@/pages/agency/form/index.vue';
 
 
-interface TLAgency extends TransferListProps<PersonDbObject> {
+interface TLAgency extends TransferListProps<AgencyDBObject> {
 
 }
 //props
-defineProps<TLAgency>();
+const props = defineProps<TLAgency>();
 //object
-const viewJson: ViewListObject<PersonDbObject>[]  = [
+const viewJson: ViewListObject<AgencyDBObject>[]  = [
     {
         label: '소속사',
         match: 'name'
     }
 ]
 //state
-const data = ref<PersonDbObject[] | null>(null);
+const data = ref<AgencyDBObject[] | null>(null);
 
 const getAgencyData = async () => {
     try {
-        const res: PersonDbObject[] = await $fetch('/api/agency', {
+        const res: AgencyDBObject[] = await $fetch('/api/agency', {
             method: 'GET'
         });
 
